@@ -1,13 +1,9 @@
-package se.vbgt.aoc.day12
+package se.vbgt.aoc.day12.part1
 
+import se.vbgt.aoc.day12.common.*
 import kotlin.math.abs
 
 data class Ship(val x: Int, val y: Int, val rx: Int, val ry: Int, val heading: Heading)
-
-fun main() {
-    val ops = readFileIntoInstructions("puzzle.txt")
-    part1(ops)
-}
 
 fun part1(ops: List<Action>) {
     val part1 = ops.fold(Ship(0, 0, 0, 0, Heading.EAST)) { ship, action ->

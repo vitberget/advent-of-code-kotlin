@@ -1,4 +1,4 @@
-package se.vbgt.aoc.day12
+package se.vbgt.aoc.day12.common
 
 enum class ActionType {
     FORWARD,
