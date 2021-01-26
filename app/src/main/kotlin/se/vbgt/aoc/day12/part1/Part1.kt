@@ -1,34 +1,64 @@
 package se.vbgt.aoc.day12.part1
 
-import se.vbgt.aoc.day12.common.*
+import se.vbgt.aoc.day12.common.Action
+import se.vbgt.aoc.day12.common.ActionType
 import kotlin.math.abs
 
-data class Ship(val x: Int, val y: Int, val rx: Int, val ry: Int, val heading: Heading)
+data class Ship(
+    val x: Int,
+    val y: Int,
+    val heading: Heading
+) {
+    fun north(number: Int) = copy(y = y - number)
+    fun south(number: Int) = copy(y = y + number)
+    fun west(number: Int) = copy(x = x - number)
+    fun east(number: Int) = copy(x = x + number)
 
-fun part1(ops: List<Action>) {
-    val part1 = ops.fold(Ship(0, 0, 0, 0, Heading.EAST)) { ship, action ->
-        doActionPart1(ship, action)
-    }
-    println(abs(part1.x) + abs(part1.y))
+    fun turnLeft(number: Int): Ship =
+        if (number == 0) this
+        else copy(
+            heading = when (heading) {
+                Heading.NORTH -> Heading.WEST
+                Heading.SOUTH -> Heading.EAST
+                Heading.WEST -> Heading.SOUTH
+                Heading.EAST -> Heading.NORTH
+            }
+        ).turnLeft(number - 90)
+
+    fun turnRight(number: Int): Ship =
+        if (number == 0) this
+        else copy(
+            heading = when (heading) {
+                Heading.NORTH -> Heading.EAST
+                Heading.SOUTH -> Heading.WEST
+                Heading.WEST -> Heading.NORTH
+                Heading.EAST -> Heading.SOUTH
+            }
+        ).turnRight(number - 90)
+
+    fun forward(number: Int): Ship =
+        when (heading) {
+            Heading.NORTH -> north(number)
+            Heading.SOUTH -> south(number)
+            Heading.EAST -> east(number)
+            Heading.WEST -> west(number)
+        }
+
+    fun manhattan(): Int = abs(x) + abs(y)
 }
 
-fun doActionPart1(ship: Ship, action: Action): Ship =
-    when (action.type) {
-        ActionType.NORTH -> north(ship, action.number)
-        ActionType.SOUTH -> south(ship, action.number)
-        ActionType.WEST -> west(ship, action.number)
-        ActionType.EAST -> east(ship, action.number)
-        ActionType.LEFT -> ship.copy(heading = turnLeft(ship.heading, action.number))
-        ActionType.RIGHT -> ship.copy(heading = turnRight(ship.heading, action.number))
-        ActionType.FORWARD -> when (ship.heading) {
-            Heading.NORTH -> north(ship, action.number)
-            Heading.SOUTH -> south(ship, action.number)
-            Heading.EAST -> east(ship, action.number)
-            Heading.WEST -> west(ship, action.number)
+fun part1(ops: List<Action>) {
+    val endingShip = ops.fold(Ship(0, 0, Heading.EAST)) { ship, action ->
+        when (action.type) {
+            ActionType.NORTH -> ship.north(action.number)
+            ActionType.SOUTH -> ship.south(action.number)
+            ActionType.WEST -> ship.west(action.number)
+            ActionType.EAST -> ship.east(action.number)
+            ActionType.LEFT -> ship.turnLeft(action.number)
+            ActionType.RIGHT -> ship.turnRight(action.number)
+            ActionType.FORWARD -> ship.forward(action.number)
         }
     }
 
-fun north(ship: Ship, number: Int) = ship.copy(y = ship.y - number)
-fun south(ship: Ship, number: Int) = ship.copy(y = ship.y + number)
-fun west(ship: Ship, number: Int) = ship.copy(x = ship.x - number)
-fun east(ship: Ship, number: Int) = ship.copy(x = ship.x + number)
+    println("Part 1: ${endingShip.manhattan()}")
+}
