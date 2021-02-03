@@ -10,8 +10,7 @@ fun day8part2(instructions: List<Instruction>) {
 
 fun getAccumulator(instructions: List<Instruction>): Int {
     for (i in 0..instructions.size) {
-        val instruction = instructions[i]
-        when (instruction.operation) {
+        when (instructions[i].operation) {
             ACC -> continue
             JMP -> {
                 val acc = runInstructions(instructions.mapIndexed { i2, value -> if (i2 == i) value.copy(operation = NOP) else value })
