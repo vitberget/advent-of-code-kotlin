@@ -23,7 +23,7 @@ fun getAccumulator(instructions: List<Instruction>): Int {
             }
         }
     }
-    return -1
+    throw IllegalStateException("Well, this is embarrassing...")
 }
 
 fun runInstructions(instructions: List<Instruction>): Int? {
