@@ -31,7 +31,7 @@ data class Ship(
     fun manhattan(): Int = abs(x) + abs(y)
 }
 
-fun part2(actions: List<Action>) {
+fun day12part2(actions: List<Action>) {
     val startingShip = Ship()
         .east(10)
         .north(1)
