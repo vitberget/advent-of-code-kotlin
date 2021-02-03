@@ -32,17 +32,16 @@ fun runInstructions(instructions: List<Instruction>): Int? {
     val visitedInstructions = HashSet<Int>()
 
     while (currentInstruction < instructions.size) {
-        if (visitedInstructions.contains(currentInstruction))
+        if (!visitedInstructions.add(currentInstruction))
             return null
 
-        visitedInstructions.add(currentInstruction)
-        val instruction = instructions[currentInstruction]
-        when (instruction.operation) {
+        val (operation, number) = instructions[currentInstruction]
+        when (operation) {
             NOP -> currentInstruction++
-            JMP -> currentInstruction += instruction.number
+            JMP -> currentInstruction += number
             ACC -> {
                 currentInstruction++
-                accumulator += instruction.number
+                accumulator += number
             }
         }
     }

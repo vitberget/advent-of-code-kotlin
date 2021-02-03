@@ -48,7 +48,8 @@ data class Ship(
 }
 
 fun day12part1(actions: List<Action>) {
-    val endingShip = actions.fold(Ship(0, 0, Heading.EAST)) { ship, action ->
+    val startingShip = Ship(0, 0, Heading.EAST)
+    val endingShip = actions.fold(startingShip) { ship, action ->
         when (action.type) {
             ActionType.NORTH -> ship.north(action.number)
             ActionType.SOUTH -> ship.south(action.number)

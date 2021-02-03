@@ -1,5 +1,7 @@
 package se.vbgt.aoc.day12.common
 
+import se.vbgt.aoc.day12.common.ActionType.*
+
 enum class ActionType {
     FORWARD,
     LEFT,
@@ -11,13 +13,13 @@ enum class ActionType {
 }
 fun actionFromLetter(letter: Char) : ActionType =
     when(letter) {
-        'L' -> ActionType.LEFT
-        'R' -> ActionType.RIGHT
-        'F' -> ActionType.FORWARD
-        'N' -> ActionType.NORTH
-        'S' -> ActionType.SOUTH
-        'W' -> ActionType.WEST
-        'E' -> ActionType.EAST
+        'L' -> LEFT
+        'R' -> RIGHT
+        'F' -> FORWARD
+        'N' -> NORTH
+        'S' -> SOUTH
+        'W' -> WEST
+        'E' -> EAST
         else -> throw IllegalArgumentException("Not a correct ActionType letter")
     }
 

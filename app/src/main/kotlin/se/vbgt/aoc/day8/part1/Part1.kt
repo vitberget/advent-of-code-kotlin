@@ -8,16 +8,14 @@ fun day8part1(instructions: List<Instruction>) {
     var accumulator = 0
     val visitedInstructions = HashSet<Int>()
 
-    while (!visitedInstructions.contains(currentInstruction)) {
-        visitedInstructions.add(currentInstruction)
-        val instruction = instructions[currentInstruction]
-
-        when (instruction.operation) {
+    while (visitedInstructions.add(currentInstruction)) {
+        val (operation, number) = instructions[currentInstruction]
+        when (operation) {
             NOP -> currentInstruction++
-            JMP -> currentInstruction += instruction.number
+            JMP -> currentInstruction += number
             ACC -> {
                 currentInstruction++
-                accumulator += instruction.number
+                accumulator += number
             }
         }
     }

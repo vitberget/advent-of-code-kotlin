@@ -25,7 +25,7 @@ data class Ship(
 
     fun forward(number: Int): Ship = copy(
         x = x + wx * number,
-        y = y + wy * number,
+        y = y + wy * number
     )
 
     fun manhattan(): Int = abs(x) + abs(y)
@@ -36,15 +36,15 @@ fun day12part2(actions: List<Action>) {
         .east(10)
         .north(1)
 
-    val endingShip = actions.fold(startingShip) { ship, action ->
-        when (action.type) {
-            NORTH -> ship.north(action.number)
-            SOUTH -> ship.south(action.number)
-            WEST -> ship.west(action.number)
-            EAST -> ship.east(action.number)
-            LEFT -> ship.turnLeft(action.number)
-            RIGHT -> ship.turnRight(action.number)
-            FORWARD -> ship.forward(action.number)
+    val endingShip = actions.fold(startingShip) { ship, (type, number) ->
+        when (type) {
+            NORTH -> ship.north(number)
+            SOUTH -> ship.south(number)
+            WEST -> ship.west(number)
+            EAST -> ship.east(number)
+            LEFT -> ship.turnLeft(number)
+            RIGHT -> ship.turnRight(number)
+            FORWARD -> ship.forward(number)
         }
     }
 
