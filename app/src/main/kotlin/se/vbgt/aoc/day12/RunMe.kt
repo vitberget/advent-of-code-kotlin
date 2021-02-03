@@ -5,7 +5,7 @@ import se.vbgt.aoc.day12.part1.part1
 import se.vbgt.aoc.day12.part2.part2
 
 fun main() {
-    val actions = readFileIntoActions("puzzle.txt")
+    val actions = readFileIntoActions("puzzle12.txt")
     part1(actions)
     part2(actions)
 }
