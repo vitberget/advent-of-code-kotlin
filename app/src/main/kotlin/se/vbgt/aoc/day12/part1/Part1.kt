@@ -47,8 +47,8 @@ data class Ship(
     fun manhattan(): Int = abs(x) + abs(y)
 }
 
-fun part1(ops: List<Action>) {
-    val endingShip = ops.fold(Ship(0, 0, Heading.EAST)) { ship, action ->
+fun part1(actions: List<Action>) {
+    val endingShip = actions.fold(Ship(0, 0, Heading.EAST)) { ship, action ->
         when (action.type) {
             ActionType.NORTH -> ship.north(action.number)
             ActionType.SOUTH -> ship.south(action.number)

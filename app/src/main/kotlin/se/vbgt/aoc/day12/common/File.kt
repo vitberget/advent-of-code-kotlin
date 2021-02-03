@@ -2,7 +2,7 @@ package se.vbgt.aoc.day12.common
 
 import java.io.File
 
-fun readFileIntoInstructions(filename: String) =
+fun readFileIntoActions(filename: String) =
     File(filename).readLines()
         .map {
             Action(
