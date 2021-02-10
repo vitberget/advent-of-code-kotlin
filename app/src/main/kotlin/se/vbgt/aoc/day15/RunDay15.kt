@@ -7,7 +7,7 @@ fun main() {
     state = getTurn(state, 2020)
     println("Part 1: ${state.number}")
 
-    state = getTurn(state, 30000000)
+    state = getTurn(state, 30_000_000)
     println("Part 2: ${state.number}")
 }
 
