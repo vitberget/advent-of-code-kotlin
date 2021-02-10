@@ -12,41 +12,37 @@ fun main() {
 }
 
 data class State(
-    val number: Int,
-    val index: Int,
-    val wordMap: MutableMap<Int, Int> // Using (immutable) Map, to slow
+        val number: Int,
+        val index: Int,
+        val wordMap: MutableMap<Int, Int> // Using (immutable) Map, to slow
 )
 
-fun stringToState(string: String): State {
-    val numbers = string.split(",")
-        .map { it.toInt() }
-
-    return State(
-        index = numbers.size - 1,
-        number = numbers.last(),
-        wordMap = numbers.dropLast(1)
-            .mapIndexed { i, v -> v to i }
-            .toMap()
-            .toMutableMap())
-}
+fun stringToState(string: String): State =
+        with(string.split(",").map { it.toInt() }) {
+            State(
+                    index = this.size - 1,
+                    number = this.last(),
+                    wordMap = this
+                            .dropLast(1)
+                            .mapIndexed { i, v -> v to i }
+                            .toMap()
+                            .toMutableMap())
+        }
 
 private fun getTurn(state: State, targetTurn: Int): State {
-    var workState = state
+    @Suppress("NAME_SHADOWING")
+    var state = state
 
-    while (workState.index < targetTurn - 1) {
-        val number = calculateNextNumber(workState)
-
-        workState.wordMap[workState.number] = workState.index
-
-        workState = workState.copy(
-            number = number,
-            index = workState.index + 1
+    while (state.index < targetTurn - 1)
+        state = state.copy(
+                number = state.wordMap.put(state.number, state.index)
+                        .getSpokenWord(state.index),
+                index = state.index + 1
         )
-    }
-    return workState
+
+    return state
 }
 
-private fun calculateNextNumber(workState: State): Int =
-    with(workState.wordMap[workState.number]) {
-        if (this == null) 0 else workState.index - this
-    }
+private fun Int?.getSpokenWord(index: Int): Int =
+        if (this == null) 0
+        else index - this
