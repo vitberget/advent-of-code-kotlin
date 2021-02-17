@@ -22,11 +22,11 @@ private fun doThatOneThinge(state: Map<Int, Int>): List<Int> {
     val result = mutableListOf<Int>()
 
     // get whatever the key 1 is pointing to
-    var current = state[1]!!
+    var currentCup = state[1]!!
 
-    while (current != 1) { // when we hit 1, we looped around the circle
-        result.add(current)
-        current = state[current]!!
+    while (currentCup != 1) { // when currentCup is 1, we looped around the circle.
+        result.add(currentCup)
+        currentCup = state[currentCup]!!
     }
 
     return result

@@ -21,9 +21,9 @@ fun part2(cupLabels: List<Int>, numberOfCrabMoves: Int): Long {
  * Determine which two cups will end up immediately clockwise of cup 1.
  * What do you get if you multiply their labels together?
  */
-fun takeTwoAfterOne(circle: Map<Int, Int>): Pair<Int, Int> {
-    val clockwiseCup1 = circle[1]!! // first clockwise of cup 1
-    val clockwiseCup2 = circle[clockwiseCup1]!! // second clockwise of cup 1
+fun takeTwoAfterOne(cupCircle: Map<Int, Int>): Pair<Int, Int> {
+    val clockwiseCup1 = cupCircle[1]!! // first clockwise of cup 1
+    val clockwiseCup2 = cupCircle[clockwiseCup1]!! // second clockwise of cup 1
     return Pair(clockwiseCup1, clockwiseCup2)
 }
 
