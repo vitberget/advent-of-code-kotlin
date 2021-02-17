@@ -18,15 +18,15 @@ fun part1(cupLabels: List<Int>, numberOfCrabMoves: Int): String {
  * collect the other cups' labels clockwise into a single string with no extra characters;
  * each number except 1 should appear exactly once.
  */
-private fun doThatOneThinge(state: Map<Int, Int>): List<Int> {
+private fun doThatOneThinge(cupCircle: Map<Int, Int>): List<Int> {
     val result = mutableListOf<Int>()
 
     // get whatever the key 1 is pointing to
-    var currentCup = state[1]!!
+    var currentCup = cupCircle[1]!!
 
     while (currentCup != 1) { // when currentCup is 1, we looped around the circle.
         result.add(currentCup)
-        currentCup = state[currentCup]!!
+        currentCup = cupCircle[currentCup]!!
     }
 
     return result
