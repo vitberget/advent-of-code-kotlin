@@ -8,9 +8,9 @@ fun part1(cupLabels: List<Int>, numberOfCrabMoves: Int): String {
    
     state = moveCupsManyTimes(state, numberOfCrabMoves)
    
-    val resultNumbers = getCupsAfterCup1ButNot1(state.cupCircle)
+    val resultCupLabels = getCupsAfterCup1ButNot1(state.cupCircle)
 
-    return resultNumbers.joinToString(separator = "")
+    return resultCupLabels.joinToString(separator = "")
 }
 
 /**

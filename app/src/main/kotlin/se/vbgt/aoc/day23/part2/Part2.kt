@@ -7,13 +7,13 @@ fun part2(cupLabels: List<Int>, numberOfCrabMoves: Int): Long {
     // Due to what you can only assume is a mistranslation (you're not exactly fluent in Crab),
     // you are quite surprised when the crab starts arranging many cups in a circle on your
     // raft - one million (1000000) in total.
-    val numbersMillion = cupLabels + (10..1_000_000)
+    val oneMillionCups = cupLabels + (10..1_000_000)
     
-    val startState = createState(numbersMillion)
+    val startState = createState(oneMillionCups)
     
-    val finishState = moveCupsManyTimes(startState, numberOfCrabMoves)
+    val endState = moveCupsManyTimes(startState, numberOfCrabMoves)
 
-    val (cup1, cup2) = takeTwoAfterCupOne(finishState.cupCircle)
+    val (cup1, cup2) = takeTwoAfterCupOne(endState.cupCircle)
     return cup1.toLong() * cup2.toLong()
 }
 
