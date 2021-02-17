@@ -13,7 +13,7 @@ fun part2(cupLabels: List<Int>, numberOfCrabMoves: Int): Long {
     
     val finishState = moveCupsManyTimes(startState, numberOfCrabMoves)
 
-    val (cup1, cup2) = takeTwoAfterOne(finishState.cupCircle)
+    val (cup1, cup2) = takeTwoAfterCupOne(finishState.cupCircle)
     return cup1.toLong() * cup2.toLong()
 }
 
@@ -21,7 +21,7 @@ fun part2(cupLabels: List<Int>, numberOfCrabMoves: Int): Long {
  * Determine which two cups will end up immediately clockwise of cup 1.
  * What do you get if you multiply their labels together?
  */
-fun takeTwoAfterOne(cupCircle: Map<Int, Int>): Pair<Int, Int> {
+fun takeTwoAfterCupOne(cupCircle: Map<Int, Int>): Pair<Int, Int> {
     val clockwiseCup1 = cupCircle[1]!! // first clockwise of cup 1
     val clockwiseCup2 = cupCircle[clockwiseCup1]!! // second clockwise of cup 1
     return Pair(clockwiseCup1, clockwiseCup2)

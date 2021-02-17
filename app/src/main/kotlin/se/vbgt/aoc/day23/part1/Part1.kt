@@ -8,7 +8,7 @@ fun part1(cupLabels: List<Int>, numberOfCrabMoves: Int): String {
    
     state = moveCupsManyTimes(state, numberOfCrabMoves)
    
-    val resultNumbers = doThatOneThinge(state.cupCircle)
+    val resultNumbers = getCupsAfterCup1ButNot1(state.cupCircle)
 
     return resultNumbers.joinToString(separator = "")
 }
@@ -18,7 +18,7 @@ fun part1(cupLabels: List<Int>, numberOfCrabMoves: Int): String {
  * collect the other cups' labels clockwise into a single string with no extra characters;
  * each number except 1 should appear exactly once.
  */
-private fun doThatOneThinge(cupCircle: Map<Int, Int>): List<Int> {
+private fun getCupsAfterCup1ButNot1(cupCircle: Map<Int, Int>): List<Int> {
     val result = mutableListOf<Int>()
 
     // get whatever the key 1 is pointing to
