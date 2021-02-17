@@ -1,12 +1,14 @@
 package se.vbgt.aoc.day23.part1
 
 import se.vbgt.aoc.day23.common.createState
-import se.vbgt.aoc.day23.common.moveCups
+import se.vbgt.aoc.day23.common.moveCupsManyTimes
 
-fun part1(numbers: List<Int>, times: Int): String {
-    var state = createState(numbers)
-    state = moveCups(state, times)
-    val resultNumbers = doThatOneThinge(state.circle)
+fun part1(cupLabels: List<Int>, numberOfCrabMoves: Int): String {
+    var state = createState(cupLabels)
+   
+    state = moveCupsManyTimes(state, numberOfCrabMoves)
+   
+    val resultNumbers = doThatOneThinge(state.cupCircle)
 
     return resultNumbers.joinToString(separator = "")
 }

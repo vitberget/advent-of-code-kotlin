@@ -35,17 +35,17 @@ internal class CupActionKtTest {
 
     @Test
     fun `test moveCups n times`() {
-        assertEquals(final, moveCups(move1, 10))
+        assertEquals(final, moveCupsManyTimes(move1, 10))
     }
 
     @Test
     fun `test destinationCup`() {
-        assertEquals(destinationCup(3, setOf(8, 9, 1), 9), 2)
-        assertEquals(destinationCup(2, setOf(8, 9, 1), 9), 7)
-        assertEquals(destinationCup(5, setOf(4, 6, 7), 9), 3)
-        assertEquals(destinationCup(4, setOf(6, 7, 9), 9), 3)
-        assertEquals(destinationCup(1, setOf(3, 6, 7), 9), 9)
-        assertEquals(destinationCup(5, setOf(7, 4, 1), 9), 3)
+        assertEquals(calculateDestinationCup(3, setOf(8, 9, 1), 9), 2)
+        assertEquals(calculateDestinationCup(2, setOf(8, 9, 1), 9), 7)
+        assertEquals(calculateDestinationCup(5, setOf(4, 6, 7), 9), 3)
+        assertEquals(calculateDestinationCup(4, setOf(6, 7, 9), 9), 3)
+        assertEquals(calculateDestinationCup(1, setOf(3, 6, 7), 9), 9)
+        assertEquals(calculateDestinationCup(5, setOf(7, 4, 1), 9), 3)
 
     }
 }

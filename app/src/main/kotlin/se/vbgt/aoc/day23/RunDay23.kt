@@ -5,18 +5,18 @@ import se.vbgt.aoc.day23.part2.part2
 import kotlin.system.measureTimeMillis
 
 fun main() {
-    val numbers = "784235916".map { it - '0' } // Map string to list of numvers
+    val cupLabels = "784235916".map { it - '0' } // Map string to list of cup labels (aka, numbers)
 
-    var p1 = ""
-    val t1 = measureTimeMillis {
-        p1 = part1(numbers, 100)
+    var part1result: String
+    val part1time = measureTimeMillis {
+        part1result = part1(cupLabels, 100)
     }
-    println("part1: ${p1}, ${t1}ms")
+    println("part1: ${part1result}, ${part1time}ms")
 
 
-    var p2 = 0L
-    val t2 = measureTimeMillis {
-        p2 = part2(numbers, 10_000_000)
+    var part2result: Long
+    val part2time = measureTimeMillis {
+        part2result = part2(cupLabels, 10_000_000)
     }
-    println("part2: ${p2}, ${t2}ms")
+    println("part2: ${part2result}, ${part2time}ms")
 }
