@@ -37,7 +37,7 @@ fun moveCups(state: State): State {
     state.cupCircle[clockWiseCup3] = destinationCupsOldTarget
 
     // The crab selects a new current cup: the cup which is immediately clockwise of the current cup.
-    return state.copy(currentCup = state.cupCircle[state.currentCup]!!)
+    return state.copy(currentCup = clockwiseOfTheThreeCups)
 }
 
 /**
