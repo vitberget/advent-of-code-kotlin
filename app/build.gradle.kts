@@ -38,5 +38,5 @@ dependencies {
 
 application {
     // Define the main class for the application.
-    mainClass.set("se.vbgt.aoc.day12.AppKt")
+    mainClass.set("se.vbgt.aoc.year2020.day12.AppKt")
 }
