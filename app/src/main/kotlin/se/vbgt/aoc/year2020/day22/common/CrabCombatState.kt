@@ -7,7 +7,28 @@ typealias CrabDeck = List<Int>
 data class CrabCombatState(
     val player1: CrabDeck,
     val player2: CrabDeck
-)
+) {
+    fun nextState(player1isWinner: Boolean): CrabCombatState =
+        if (player1isWinner)
+            copy(
+                player1 = player1.drop(1) + player1[0] + player2[0],
+                player2 = player2.drop(1)
+            )
+        else
+            copy(
+                player1 = player1.drop(1),
+                player2 = player2.drop(1) + player2[0] + player1[0]
+
+            )
+
+    fun hasAWinner(): Boolean = player1.isEmpty() || player2.isEmpty()
+
+    fun getWinningDeck(): CrabDeck =
+        listOf(player1, player2)
+            .first { it.isNotEmpty() }
+
+
+}
 
 fun fileToCrabCombatState(filename: String): CrabCombatState =
     textToCrabCombatState(
