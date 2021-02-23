@@ -8,15 +8,17 @@ import kotlin.system.measureTimeMillis
 fun main() {
     val puzzleCombatState = fileToCrabCombatState("puzzle22.txt")
 
-    var p1: Int
-    val t1 = measureTimeMillis {
-        p1 = part1(puzzleCombatState)
-    }
-    println("Part1: $p1, took ${t1}ms")
+    val (p1, t1) = logTime { part1(puzzleCombatState)}
+    println("Part1: ${p1}, took ${t1}ms")
 
-    var p2: Int
-    val t2 = measureTimeMillis {
-        p2 = part2(puzzleCombatState)
+    val (p2, t2) = logTime { part2(puzzleCombatState) }
+    println("Part2: ${p2}, took ${t2}ms")
+}
+
+fun logTime(function: () -> Any): Pair<Any,Long> {
+    var a : Any
+    val t = measureTimeMillis {
+        a = function()
     }
-    println("Part2: $p2, took ${t2}ms")
+    return a to t
 }
