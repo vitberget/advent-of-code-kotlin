@@ -4,11 +4,16 @@ import se.vbgt.aoc.year2020.day23.common.createState
 import se.vbgt.aoc.year2020.day23.common.moveCupsManyTimes
 
 fun part1(cupLabels: List<Int>, numberOfCrabMoves: Int): String {
-    var state = createState(cupLabels)
+    println("===== Part1 ====")
+
+    val state = createState(cupLabels)
+    println("cupLabels ${cupLabels} gives state: ${state}")
+
+    val finalstate = moveCupsManyTimes(state, numberOfCrabMoves)
    
-    state = moveCupsManyTimes(state, numberOfCrabMoves)
-   
-    val resultCupLabels = getCupsAfterCup1ButNot1(state.cupCircle)
+    val resultCupLabels = getCupsAfterCup1ButNot1(finalstate.cupCircle)
+
+    println("state after ${numberOfCrabMoves} moves: ${finalstate}")
 
     return resultCupLabels.joinToString(separator = "")
 }

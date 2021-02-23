@@ -10,6 +10,9 @@ data class State(
     // Much faster than a list when rearranging
     val cupCircle: HashMap<Int, Int>)
 
+// puzzle "784235916" gives cupLabels [7, 8, 4, 2, 3, 5, 9, 1, 6] gives state:
+// State(currentCup=7, cupCircle={7=8, 8=4, 4=2, 2=3, 3=5, 5=9, 9=1, 1=6, 6=7})
+
 fun createState(cupLabels: List<Int>): State {
     // Make a copy of the list of numbers, with one number
     // taken from the head of the list,

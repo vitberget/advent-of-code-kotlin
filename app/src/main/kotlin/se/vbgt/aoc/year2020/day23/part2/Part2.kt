@@ -4,6 +4,7 @@ import se.vbgt.aoc.year2020.day23.common.createState
 import se.vbgt.aoc.year2020.day23.common.moveCupsManyTimes
 
 fun part2(cupLabels: List<Int>, numberOfCrabMoves: Int): Long {
+    println("===== Part2 ====")
     // Due to what you can only assume is a mistranslation (you're not exactly fluent in Crab),
     // you are quite surprised when the crab starts arranging many cups in a circle on your
     // raft - one million (1000000) in total.
