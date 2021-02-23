@@ -18,7 +18,6 @@ data class CrabCombatState(
             copy(
                 player1 = player1.drop(1),
                 player2 = player2.drop(1) + player2[0] + player1[0]
-
             )
 
     fun hasAWinner(): Boolean = player1.isEmpty() || player2.isEmpty()
@@ -26,8 +25,6 @@ data class CrabCombatState(
     fun getWinningDeck(): CrabDeck =
         listOf(player1, player2)
             .first { it.isNotEmpty() }
-
-
 }
 
 fun fileToCrabCombatState(filename: String): CrabCombatState =
@@ -48,5 +45,4 @@ fun textToCrabCombatState(text: String): CrabCombatState =
 
 fun textToCrabDeck(text: String): CrabDeck =
     text.lines()
-        .drop(1)
-        .map { it.toInt() }
+        .mapNotNull { it.toIntOrNull() }

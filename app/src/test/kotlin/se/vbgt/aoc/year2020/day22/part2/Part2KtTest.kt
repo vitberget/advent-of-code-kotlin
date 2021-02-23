@@ -28,7 +28,6 @@ internal class Part2KtTest {
                 7
                 10
             """.trimIndent()))
-
         )
     }
 }
