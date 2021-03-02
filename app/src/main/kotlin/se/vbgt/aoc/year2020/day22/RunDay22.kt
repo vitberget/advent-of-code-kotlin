@@ -18,3 +18,7 @@ fun main() {
     val (p2, t2) = measureTimedValue { part2(puzzleCombatState) }
     println("Part2: ${p2}, took ${t2}")
 }
+
+// Puzzle
+// Part1: 33434, took 8.28ms
+// Part2: 31657, took 75.6s
