@@ -2,20 +2,12 @@ package se.vbgt.aoc.year2020.day17.part2
 
 import java.io.File
 
-data class Position(
-    val x: Int,
-    val y: Int,
-    val z: Int,
-    val w: Int
-)
-typealias Positions = Set<Position>
-
 /**
  * Nothing really more special for my 4d solutions over my 3d solution,
  * except that there is now a fourth dimension of course.
  */
 fun part2(filename: String): Int {
-    var state = readFileToState(filename)
+    var state = readFileToPositions(filename)
 
     for (game in 1..6) {
         state = playConway4d(state)
@@ -24,32 +16,38 @@ fun part2(filename: String): Int {
     return state.size
 }
 
-fun playConway4d(positions: Positions): Positions {
-    val positionsToTest = positions.map {
-        surroundingPositions(it)
-    }.flatten()
+private data class Position(
+    val x: Int,
+    val y: Int,
+    val z: Int,
+    val w: Int
+)
 
-    return positionsToTest.filter {
-        val noOfActiveNeighbourCells = surroundingPositions(it).intersect(positions).size
-        noOfActiveNeighbourCells == 3 || noOfActiveNeighbourCells == 2 && positions.contains(it)
-    }.toSet()
-}
+private typealias Positions = Set<Position>
 
-val surroundingDeltas = generateSurroundingDeltas()
-fun generateSurroundingDeltas(): List<Position> {
+private fun playConway4d(positions: Positions): Positions =
+    positions.map { surroundingPositions(it) }
+        .flatten()
+        .filter {
+            with(surroundingPositions(it).intersect(positions).size) {
+                this == 3 || this == 2 && positions.contains(it)
+            }
+        }.toSet()
+
+private val surroundingDeltas = generateSurroundingDeltas()
+private fun generateSurroundingDeltas(): List<Position> {
     val mutList = mutableListOf<Position>()
     for (w in -1..1)
         for (z in -1..1)
             for (y in -1..1)
-                for (x in -1..1) {
-                    if (x != 0 || y != 0 || z != 0 || w != 0) {
+                for (x in -1..1)
+                    if (x != 0 || y != 0 || z != 0 || w != 0)
                         mutList.add(Position(x = x, y = y, z = z, w = w))
-                    }
-                }
+
     return mutList.toList()
 }
 
-fun surroundingPositions(position: Position): Positions =
+private fun surroundingPositions(position: Position): Positions =
     surroundingDeltas.map {
         Position(
             x = it.x + position.x,
@@ -59,10 +57,17 @@ fun surroundingPositions(position: Position): Positions =
         )
     }.toSet()
 
-fun readFileToState(filename: String): Positions =
-    File(filename).readLines()
-        .mapIndexed { y, line ->
-            line.mapIndexed { x, char -> if (char == '#') Position(x, y, 0, 0) else null }
-                .filterNotNull()
-        }.flatten()
+private fun readFileToPositions(filename: String): Positions =
+    File(filename)
+        .readLines()
+        .mapIndexed { y, line -> lineToPositions(y, line) }
+        .flatten()
         .toSet()
+
+private fun lineToPositions(y: Int, line: String): List<Position> =
+    line.mapIndexedNotNull { x, char ->
+        if (char == '#')
+            Position(x, y, 0, 0)
+        else
+            null
+    }
