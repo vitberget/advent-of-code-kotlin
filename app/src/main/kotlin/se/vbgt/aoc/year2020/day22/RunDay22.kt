@@ -12,7 +12,7 @@ import kotlin.time.measureTimedValue
 fun main() {
     val puzzleCombatState = fileToCrabCombatState("puzzle22.txt")
 
-    val (p1,t1) = measureTimedValue {part1(puzzleCombatState)}
+    val (p1,t1) = measureTimedValue { part1(puzzleCombatState)}
     println("Part1: ${p1}, took ${t1}")
 
     val (p2, t2) = measureTimedValue { part2(puzzleCombatState) }
