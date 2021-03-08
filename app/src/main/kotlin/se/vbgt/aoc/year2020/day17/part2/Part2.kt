@@ -26,8 +26,11 @@ private data class Position(
 private typealias Positions = Set<Position>
 
 private fun playConway4d(positions: Positions): Positions =
-    positions.map { surroundingPositions(it) }
+    positions
+        .asSequence()
+        .map { surroundingPositions(it) }
         .flatten()
+        .toSet()
         .filter {
             with(surroundingPositions(it).intersect(positions).size) {
                 this == 3 || this == 2 && positions.contains(it)
@@ -35,17 +38,19 @@ private fun playConway4d(positions: Positions): Positions =
         }.toSet()
 
 private val surroundingDeltas =
-    mutableListOf<Position>().apply {
-        for (w in -1..1)
-            for (z in -1..1)
-                for (y in -1..1)
-                    for (x in -1..1)
-                        if (x != 0 || y != 0 || z != 0 || w != 0)
-                            add(Position(x = x, y = y, z = z, w = w))
-    }.toList()
+    mutableListOf<Position>()
+        .apply {
+            for (w in -1..1)
+                for (z in -1..1)
+                    for (y in -1..1)
+                        for (x in -1..1)
+                            if (x != 0 || y != 0 || z != 0 || w != 0)
+                                add(Position(x = x, y = y, z = z, w = w))
+        }
 
 private fun surroundingPositions(position: Position): Positions =
-    surroundingDeltas.map {
+    surroundingDeltas
+        .map {
         Position(
             x = it.x + position.x,
             y = it.y + position.y,

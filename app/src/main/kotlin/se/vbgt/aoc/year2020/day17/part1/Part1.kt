@@ -32,8 +32,11 @@ private typealias Positions = Set<Position>
  * the rules that keeps or turns a cell active
  */
 private fun playConway3d(positions: Positions): Positions =
-    positions.map { surroundingPositions(it) }
+    positions
+        .asSequence()
+        .map { surroundingPositions(it) }
         .flatten()
+        .toSet()
         .filter {
             // Intersect = all item that exists in both sets, which gives us all the
             // surrounding cells of a positions that exists in the starting game positions
@@ -52,13 +55,14 @@ private fun playConway3d(positions: Positions): Positions =
  * are zero (this is the posiprivate val surroundingDeltas = generateSurroundingDeltas()
  */
 private val surroundingDeltas =
-    mutableListOf<Position>().apply {
-        for (z in -1..1)
-            for (y in -1..1)
-                for (x in -1..1)
-                    if (x != 0 || y != 0 || z != 0)
-                        add(Position(x = x, y = y, z = z))
-    }.toList()
+    mutableListOf<Position>()
+        .apply {
+            for (z in -1..1)
+                for (y in -1..1)
+                    for (x in -1..1)
+                        if (x != 0 || y != 0 || z != 0)
+                            add(Position(x = x, y = y, z = z))
+        }
 
 /**
  * Take the set of surrounding deltas and map them all on the
