@@ -34,18 +34,15 @@ private fun playConway4d(positions: Positions): Positions =
             }
         }.toSet()
 
-private val surroundingDeltas = generateSurroundingDeltas()
-private fun generateSurroundingDeltas(): List<Position> {
-    val mutList = mutableListOf<Position>()
-    for (w in -1..1)
-        for (z in -1..1)
-            for (y in -1..1)
-                for (x in -1..1)
-                    if (x != 0 || y != 0 || z != 0 || w != 0)
-                        mutList.add(Position(x = x, y = y, z = z, w = w))
-
-    return mutList.toList()
-}
+private val surroundingDeltas =
+    mutableListOf<Position>().apply {
+        for (w in -1..1)
+            for (z in -1..1)
+                for (y in -1..1)
+                    for (x in -1..1)
+                        if (x != 0 || y != 0 || z != 0 || w != 0)
+                            add(Position(x = x, y = y, z = z, w = w))
+    }.toList()
 
 private fun surroundingPositions(position: Position): Positions =
     surroundingDeltas.map {

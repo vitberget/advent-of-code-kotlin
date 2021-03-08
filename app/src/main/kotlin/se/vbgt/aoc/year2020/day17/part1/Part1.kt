@@ -49,19 +49,16 @@ private fun playConway3d(positions: Positions): Positions =
 
 /**
  * Delta positions surrounding a position. Filter out where all coordinates
- * are zero (this is the position itself
+ * are zero (this is the posiprivate val surroundingDeltas = generateSurroundingDeltas()
  */
-private val surroundingDeltas = generateSurroundingDeltas()
-private fun generateSurroundingDeltas(): List<Position> {
-    val mutList = mutableListOf<Position>()
-    for (z in -1..1)
-        for (y in -1..1)
-            for (x in -1..1)
-                if (x != 0 || y != 0 || z != 0)
-                    mutList.add(Position(x = x, y = y, z = z))
-
-    return mutList.toList()
-}
+private val surroundingDeltas =
+    mutableListOf<Position>().apply {
+        for (z in -1..1)
+            for (y in -1..1)
+                for (x in -1..1)
+                    if (x != 0 || y != 0 || z != 0)
+                        add(Position(x = x, y = y, z = z))
+    }.toList()
 
 /**
  * Take the set of surrounding deltas and map them all on the
