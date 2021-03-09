@@ -10,14 +10,16 @@ import kotlin.time.measureTimedValue
 fun main() {
 //    val filename = "example10a.txt"
     val filename = "puzzle10.txt"
-    val adapters: List<Int> = File(filename)
+    val adapters: List<Long> = File(filename)
         .readLines()
-        .mapNotNull { it.toIntOrNull() }
+        .mapNotNull { it.toLongOrNull() }
         .sorted()
 
     val (p1, t1) = measureTimedValue { part1(adapters) }
     println("Part1: ${p1}, took ${t1}")
 
     val (p2, t2) = measureTimedValue { part2(adapters) }
-    println("Part1: ${p2}, took ${t2}")
+    println("Part2: ${p2}, took ${t2}")
 }
+// Part1: 2080, took 10.5ms
+// Part2: 6908379398144, took 12.6ms
