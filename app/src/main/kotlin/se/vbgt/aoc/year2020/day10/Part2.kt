@@ -72,6 +72,6 @@ private fun MutableMap<Adapter, Set<Adapter>>.addPossibleJumpsFromHere(adapters:
     val adapter = adapters[0]
     this[adapter] = adapters
         .drop(1)
-        .takeWhile { n -> n - adapter <= 3 }
+        .takeWhile { n -> n <= adapter + 3 }
         .toSet()
 }
