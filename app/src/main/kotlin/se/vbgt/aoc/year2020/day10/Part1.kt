@@ -10,8 +10,15 @@ fun part1(adapters: Adapters): Long {
 }
 
 private fun calculateDeltasBetweenValues(adapters: Adapters): Adapters {
-    val list1 = adapters.drop(1)
-    val list2 = adapters.dropLast(1)
+    // From the incoming list "1 2 3 4 7", drop first respectively the last
+    val list1 = adapters.drop(1)  //2 3 4 7
+    val list2 = adapters.dropLast(1) // 1 2 3 4
+
+    // zip the lists, subtracting between the values in the list
+    // 2 - 1 = 1
+    // 3 - 2 = 1
+    // 4 - 3 = 1
+    // 7 - 4 = 3
     return list1.zip(list2) { n1, n2 -> n1 - n2 }
 }
 
