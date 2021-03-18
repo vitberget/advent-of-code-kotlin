@@ -1,7 +1,8 @@
 package se.vbgt.aoc.year2020.day10
 
 fun part1(adapters: Adapters): Long {
-    val deltas = calculateDeltasBetweenValues(adapters)
+    // Snodde .zipWithNext från Sasan
+    val deltas = adapters.zipWithNext { n1, n2 -> n2 -n1 } //calculateDeltasBetweenValues(adapters)
 
     val numberOfGapsSize1 = deltas.count { it == 1L }.toLong()
     val numberOfGapsSize3 = deltas.count { it == 3L }.toLong()

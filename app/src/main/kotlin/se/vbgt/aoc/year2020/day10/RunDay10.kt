@@ -19,7 +19,7 @@ fun main() {
     println("Part2: ${p2}, took ${t2}")
 
     // Part1: 2080, took 10.5ms
-    // Part2: 6908379398144, took 12.6ms
+    // Part2: 690b8379398144, took 12.6ms
 }
 
 
@@ -27,6 +27,10 @@ fun main() {
  * Read file into numbers
  * Add 0 - the starting point
  * Add max value +3 - the target point
+ *
+ * From AoC:
+ * "Treat the charging outlet near your seat as having an effective joltage rating of 0."
+ * "In addition, your device has a built-in joltage adapter rated for 3 jolts higher than the highest-rated adapter in your bag."
  */
 private fun fileToAdapters(filename: String): Adapters {
     val adaptersFromFile: Adapters = File(filename)
