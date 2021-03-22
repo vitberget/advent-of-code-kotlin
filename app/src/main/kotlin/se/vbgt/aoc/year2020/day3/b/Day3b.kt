@@ -58,7 +58,7 @@ fun walkThrough(
 ): Long =
     forest
         .trees
-        .count { it.x == (step.x * it.y) % forest.width }
+        .count { it.y % step.y == 0 && it.x == (step.x * it.y) % forest.width }
         .toLong()
 
 fun readFileIntoForest(filename: String): Forest =
