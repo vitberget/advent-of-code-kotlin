@@ -1,4 +1,4 @@
-package se.vbgt.aoc.year2020.day3
+package se.vbgt.aoc.year2020.day3.a
 
 import java.io.File
 import kotlin.time.ExperimentalTime
