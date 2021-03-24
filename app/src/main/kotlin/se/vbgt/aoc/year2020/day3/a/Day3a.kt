@@ -22,7 +22,9 @@ data class Forest(
 
 @ExperimentalTime
 fun main() {
-    val forest = readFileIntoForest("puzzle3.txt")
+    val (forest,t) = measureTimedValue { readFileIntoForest("puzzle3.txt") }
+    println("Forest in ${t}")
+
     part1(forest)
     part2(forest)
 }
