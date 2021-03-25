@@ -6,27 +6,30 @@ fun part2(allergens: Map<String, WordSet>): String =
         .map { it.value }
         .joinToString(separator = ",")
 
-tailrec fun getUniqueAllergens(allergens: Map<String, Set<String>>): Map<String, String> {
-    val mores = allergens
+tailrec fun getUniqueAllergens(allergensWordsMap: Map<String, Set<String>>): Map<String, String> {
+    val allergensWithMoreThanOneWord = allergensWordsMap
         .filter { it.value.size > 1 }
         .map { it.key }
 
-    return if (mores.isEmpty()) {
-        allergens
+    return if (allergensWithMoreThanOneWord.isEmpty()) {
+        allergensWordsMap
             .map { it.key to it.value.first() }
             .toMap()
     } else {
-        val oneWordOnlies = allergens
+        val wordsOnlyOnceInAllergens = allergensWordsMap
             .filter { it.value.size == 1 }
             .flatMap { it.value }
             .toSet()
 
-        getUniqueAllergens(allergens
+        getUniqueAllergens(allergensWordsMap
             .map {
-                if (mores.contains(it.key))
-                    it.key to it.value.filterNot { v -> oneWordOnlies.contains(v) }.toSet()
-                else
-                    it.key to it.value
+                it.key to
+                        if (allergensWithMoreThanOneWord.contains(it.key))
+                            it.value
+                                .filterNot { word -> wordsOnlyOnceInAllergens.contains(word) }
+                                .toSet()
+                        else
+                            it.value
             }
             .toMap())
     }
