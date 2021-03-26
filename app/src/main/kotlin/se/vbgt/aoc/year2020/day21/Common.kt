@@ -5,13 +5,13 @@ import java.io.File
 typealias WordSet = Set<String>
 typealias WordSetPair = Pair<WordSet, WordSet>
 
-fun fileToState(filename: String): List<WordSetPair> {
+fun fileToIngredientsAndAllergens(filename: String): List<WordSetPair> {
     return File(filename)
         .readLines()
-        .map { lineToWordSetPair(it) }
+        .map { lineToIngredientsAndAllergens(it) }
 }
 
-fun lineToWordSetPair(line: String): WordSetPair {
+fun lineToIngredientsAndAllergens(line: String): WordSetPair {
     val (ingredientPart, allergenPart) = line.split(" (contains ")
 
     return Pair(
@@ -25,7 +25,7 @@ fun lineToWordSetPair(line: String): WordSetPair {
     )
 }
 
-fun getAllergenWords(state: List<WordSetPair>): Map<String, WordSet> =
+fun getAllergenIngredients(state: List<WordSetPair>): Map<String, WordSet> =
     state
         .flatMap { it.second }
         .toSet()
