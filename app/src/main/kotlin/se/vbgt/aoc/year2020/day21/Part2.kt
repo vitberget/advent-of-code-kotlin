@@ -6,7 +6,7 @@ fun part2(allergens: Map<String, WordSet>): String =
         .map { it.value }
         .joinToString(separator = ",")
 
-tailrec fun getUniqueAllergens(allergensWordsMap: Map<String, Set<String>>): Map<String, String> {
+tailrec fun getUniqueAllergens(allergensWordsMap: Map<String, WordSet>): Map<String, String> {
     val allergensWithMoreThanOneWord = allergensWordsMap
         .filter { it.value.size > 1 }
         .map { it.key }
