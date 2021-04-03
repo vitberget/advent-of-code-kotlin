@@ -4,6 +4,9 @@ import static java.lang.System.out;
 import static se.vbgt.jni.NativeRangeLib.lowerHalf;
 import static se.vbgt.jni.NativeRangeLib.upperHalf;
 
+/**
+ * -Djava.library.path=/home/k/src/aoc-kotlin/app/src/main/java/se/vbgt/jni/native
+ */
 public class MainJNI {
     public static void main(String[] args) {
         int[] startingRange = {0, 127};

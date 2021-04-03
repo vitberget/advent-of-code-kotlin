@@ -3,6 +3,9 @@ package se.vbgt.aoc.year2020.day5.jni
 import se.vbgt.jni.NativeRangeLib
 import java.io.File
 
+/**
+ * -Djava.library.path=/home/k/src/aoc-kotlin/app/src/main/java/se/vbgt/jni/native
+ */
 fun main() {
     val sortedSeats = fileToSeats("puzzle5.txt")
     println("Part1: ${sortedSeats.last()}")
