@@ -39,12 +39,3 @@ Java_se_vbgt_jni_NativeRangeLib_upperHalf (JNIEnv *env, jclass cls, jintArray in
     return returnMe;
 }
 
-/*
-    Linux:
-    g++ -dynamiclib -O3 \
-        -I/usr/include \
-        -I$JAVA_HOME/include \
-        -I$JAVA_HOME/include/darwin \
-        NativeRangeLib.cpp -o native-range.so
-*/
-
