@@ -13,7 +13,7 @@ extern "C" {
  * Signature: ([I)[I
  */
 JNIEXPORT jintArray JNICALL Java_se_vbgt_jni_NativeRangeLib_lowerHalf
-  (JNIEnv *, jobject, jintArray);
+  (JNIEnv *, jclass, jintArray);
 
 /*
  * Class:     se_vbgt_jni_NativeRangeLib
@@ -21,7 +21,7 @@ JNIEXPORT jintArray JNICALL Java_se_vbgt_jni_NativeRangeLib_lowerHalf
  * Signature: ([I)[I
  */
 JNIEXPORT jintArray JNICALL Java_se_vbgt_jni_NativeRangeLib_upperHalf
-  (JNIEnv *, jobject, jintArray);
+  (JNIEnv *, jclass, jintArray);
 
 #ifdef __cplusplus
 }

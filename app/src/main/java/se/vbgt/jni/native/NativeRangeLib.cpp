@@ -2,7 +2,7 @@
 #include "se_vbgt_jni_NativeRangeLib.h"
 
 JNIEXPORT jintArray JNICALL
-Java_se_vbgt_jni_NativeRangeLib_lowerHalf (JNIEnv *env, jobject obj, jintArray inputRange) {
+Java_se_vbgt_jni_NativeRangeLib_lowerHalf (JNIEnv *env, jclass cls, jintArray inputRange) {
 
     jint* range = env->GetIntArrayElements(inputRange, 0);
     jint low = range[0];
@@ -21,7 +21,7 @@ Java_se_vbgt_jni_NativeRangeLib_lowerHalf (JNIEnv *env, jobject obj, jintArray i
 }
 
 JNIEXPORT jintArray JNICALL
-Java_se_vbgt_jni_NativeRangeLib_upperHalf (JNIEnv *env, jobject obj, jintArray inputRange) {
+Java_se_vbgt_jni_NativeRangeLib_upperHalf (JNIEnv *env, jclass cls, jintArray inputRange) {
 
     jint* range = env->GetIntArrayElements(inputRange, 0);
     jint low = range[0];
