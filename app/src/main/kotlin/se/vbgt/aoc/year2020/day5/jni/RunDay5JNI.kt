@@ -1,5 +1,6 @@
 package se.vbgt.aoc.year2020.day5.jni
 
+import se.vbgt.jni.NativeRangeLib
 import java.io.File
 
 fun main() {
@@ -29,7 +30,7 @@ tailrec fun rangeToInt(line: String, range: RangeJNI, lowerChar: Char): Int =
 
 tailrec fun part2(seats: List<Int>): Int =
     if (seats[0] + 2 == seats[1])
-        seats[0] + 1
+        NativeRangeLib.incOnce(seats[0])
     else
         part2(seats.drop(1))
 

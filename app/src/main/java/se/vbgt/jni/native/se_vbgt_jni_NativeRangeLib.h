@@ -23,6 +23,14 @@ JNIEXPORT jintArray JNICALL Java_se_vbgt_jni_NativeRangeLib_lowerHalf
 JNIEXPORT jintArray JNICALL Java_se_vbgt_jni_NativeRangeLib_upperHalf
   (JNIEnv *, jclass, jintArray);
 
+/*
+ * Class:     se_vbgt_jni_NativeRangeLib
+ * Method:    incOnce
+ * Signature: (I)I
+ */
+JNIEXPORT jint JNICALL Java_se_vbgt_jni_NativeRangeLib_incOnce
+  (JNIEnv *, jclass, jint);
+
 #ifdef __cplusplus
 }
 #endif

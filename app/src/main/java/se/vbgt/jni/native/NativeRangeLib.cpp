@@ -39,3 +39,7 @@ Java_se_vbgt_jni_NativeRangeLib_upperHalf (JNIEnv *env, jclass cls, jintArray in
     return returnMe;
 }
 
+JNIEXPORT jint JNICALL
+Java_se_vbgt_jni_NativeRangeLib_incOnce (JNIEnv *env, jclass cls, jint input) {
+    return input + 1;
+}

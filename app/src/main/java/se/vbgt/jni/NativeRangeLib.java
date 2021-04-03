@@ -14,4 +14,5 @@ public class NativeRangeLib {
 
     static public native int[] lowerHalf(int[] range);
     static public native int[] upperHalf(int[] range);
+    static public native int incOnce(int value);
 }
