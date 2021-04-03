@@ -1,14 +1,16 @@
 package se.vbgt.jni;
 
+import static java.lang.System.loadLibrary;
+
 /**
  * To create header file: javac NativeRangeLib.java -h  .
  */
 
 public class NativeRangeLib {
     static {
-        System.loadLibrary("native-range");
+        loadLibrary("native-range");
     }
 
-    public native int[] lowerHalf(int[] range);
-    public native int[] upperHalf(int[] range);
+    static public native int[] lowerHalf(int[] range);
+    static public native int[] upperHalf(int[] range);
 }
