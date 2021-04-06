@@ -1,6 +1,7 @@
 package se.vbgt.aoc.year2020.day5.jni
 
 import se.vbgt.jni.NativeRangeLib
+import se.vbgt.jni.RangeJava
 
 data class RangeJNI(
     val lower: Int,
@@ -13,7 +14,7 @@ data class RangeJNI(
 
     fun upperHalf(): RangeJNI =
         copy(
-            lower = NativeRangeLib.upperHalf(toIntArray())[0]
+            lower = NativeRangeLib.upperHalf(RangeJava(lower,higher)).lower
         )
 
     private fun toIntArray(): IntArray =

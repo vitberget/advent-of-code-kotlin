@@ -12,9 +12,13 @@ public class MainJNI {
         int[] startingRange = {0, 127};
 
         int[] lower = lowerHalf(startingRange);
-        int[] upper = upperHalf(startingRange);
+        RangeJava rangeJava = upperHalf(new RangeJava(0, 127));
 
         out.printf("Lower %d %d%n", lower[0], lower[1]);
-        out.printf("Upper %d %d%n", upper[0], upper[1]);
+        out.println("Upper o " + rangeJava);
+        Integer o1 = rangeJava.getLower();
+        Integer o2 = rangeJava.getUpper();
+        out.println("Upper o1 " + o1);
+        out.println("Upper o2 " + o2);
     }
 }

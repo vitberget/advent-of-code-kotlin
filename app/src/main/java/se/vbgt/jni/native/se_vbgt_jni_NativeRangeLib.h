@@ -18,10 +18,10 @@ JNIEXPORT jintArray JNICALL Java_se_vbgt_jni_NativeRangeLib_lowerHalf
 /*
  * Class:     se_vbgt_jni_NativeRangeLib
  * Method:    upperHalf
- * Signature: ([I)[I
+ * Signature: (Lse/vbgt/jni/RangeJava;)Lse/vbgt/jni/RangeJava;
  */
-JNIEXPORT jintArray JNICALL Java_se_vbgt_jni_NativeRangeLib_upperHalf
-  (JNIEnv *, jclass, jintArray);
+JNIEXPORT jobject JNICALL Java_se_vbgt_jni_NativeRangeLib_upperHalf
+  (JNIEnv *, jclass, jobject);
 
 /*
  * Class:     se_vbgt_jni_NativeRangeLib

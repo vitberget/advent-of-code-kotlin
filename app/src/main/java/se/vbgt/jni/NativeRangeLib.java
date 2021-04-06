@@ -3,7 +3,8 @@ package se.vbgt.jni;
 import static java.lang.System.loadLibrary;
 
 /**
- * To create header file: javac NativeRangeLib.java -h  .
+ * To create header file:
+ *   javac RangeJava.java NativeRangeLib.java -h native/
  */
 
 public class NativeRangeLib {
@@ -13,6 +14,6 @@ public class NativeRangeLib {
     }
 
     static public native int[] lowerHalf(int[] range);
-    static public native int[] upperHalf(int[] range);
+    static public native RangeJava upperHalf(RangeJava range);
     static public native int incOnce(int value);
 }
