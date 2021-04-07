@@ -19,7 +19,7 @@ fun getRow(line: String): Int = rangeToInt(line, Range(0, 127), 'F')
 fun getColumn(line: String): Int = rangeToInt(line.takeLast(3), Range(0, 7), 'L')
 
 tailrec fun rangeToInt(line: String, range: Range, lowerChar: Char): Int =
-    if (range.lower == range.higher)
+    if (range.lower == range.upper)
         range.lower
     else
         rangeToInt(
