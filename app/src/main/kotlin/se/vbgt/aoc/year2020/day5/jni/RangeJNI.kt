@@ -9,12 +9,16 @@ data class RangeJNI(
 ) {
     fun lowerHalf(): RangeJNI =
         copy(
-            higher = NativeRangeLib.lowerHalf(toIntArray())[1]
+            higher = NativeRangeLib.lowerHalf(
+                toIntArray()
+            )[1]
         )
 
     fun upperHalf(): RangeJNI =
         copy(
-            lower = NativeRangeLib.upperHalf(RangeJava(lower,higher)).lower
+            lower = NativeRangeLib.upperHalf(
+                RangeJava(lower, higher)
+            ).lower
         )
 
     private fun toIntArray(): IntArray =
