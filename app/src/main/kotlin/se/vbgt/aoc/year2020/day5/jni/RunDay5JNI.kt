@@ -7,6 +7,7 @@ import java.io.File
  * -Djava.library.path=/home/k/src/aoc-kotlin/app/src/main/java/se/vbgt/jni/native
  */
 fun main() {
+    println("Day 5 JNI edition")
     val sortedSeats = fileToSeats("puzzle5.txt")
     println("Part1: ${sortedSeats.last()}")
     println("Part2: ${part2(sortedSeats)}")
