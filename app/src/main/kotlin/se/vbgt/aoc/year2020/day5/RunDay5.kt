@@ -3,7 +3,7 @@ package se.vbgt.aoc.year2020.day5
 import java.io.File
 
 fun main() {
-    println("Day 5")
+    println("Day 5 range")
     val sortedSeats = fileToSeats("puzzle5.txt")
     println("Part1: ${sortedSeats.last()}")
     println("Part2: ${part2(sortedSeats)}")
