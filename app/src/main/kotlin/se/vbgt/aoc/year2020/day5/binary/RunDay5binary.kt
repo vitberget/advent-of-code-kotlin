@@ -1,6 +1,5 @@
 package se.vbgt.aoc.year2020.day5.binary
 
-import se.vbgt.aoc.year2020.day5.part2
 import java.io.File
 
 fun main() {
@@ -10,21 +9,22 @@ fun main() {
     println("Part2: ${part2(sortedSeats)}")
 }
 
-fun fileToSeats(filename: String): List<Int> =
+private val oneLetters = "[BR]".toRegex()
+private val zeroLetters = "[FL]".toRegex()
+
+private fun fileToSeats(filename: String): List<Int> =
     File(filename)
         .readLines()
         .map {
-            it.replace('F', '0')
-                .replace('L', '0')
-                .replace('B', '1')
-                .replace('R', '1')
+            it.replace(oneLetters, "1")
+                .replace(zeroLetters, "0")
         }
         .map { it.toInt(2) }
         .sorted()
 
-tailrec fun part2b(seats: List<Int>): Int =
+private tailrec fun part2(seats: List<Int>): Int =
     if (seats[0] + 2 == seats[1])
         seats[0] + 1
     else
-        part2b(seats.drop(1))
+        part2(seats.drop(1))
 
