@@ -5,11 +5,11 @@ import se.vbgt.jni.RangeJava
 
 data class RangeJNI(
     val lower: Int,
-    val higher: Int,
+    val upper: Int,
 ) {
     fun lowerHalf(): RangeJNI =
         copy(
-            higher = NativeRangeLib.lowerHalf(
+            upper = NativeRangeLib.lowerHalf(
                 toIntArray()
             )[1]
         )
@@ -17,13 +17,13 @@ data class RangeJNI(
     fun upperHalf(): RangeJNI =
         copy(
             lower = NativeRangeLib.upperHalf(
-                RangeJava(lower, higher)
+                RangeJava(lower, upper)
             ).lower
         )
 
     private fun toIntArray(): IntArray =
         IntArray(2).apply {
             this[0] = lower
-            this[1] = higher
+            this[1] = upper
         }
 }
