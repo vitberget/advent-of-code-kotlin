@@ -13,7 +13,7 @@ public class NativeRangeLib {
         // on Linux, the name must then be libnative-range.so
     }
 
+    static public native int incOnce(int value);
     static public native int[] lowerHalf(int[] range);
     static public native RangeJava upperHalf(RangeJava range);
-    static public native int incOnce(int value);
 }
