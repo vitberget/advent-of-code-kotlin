@@ -3,7 +3,7 @@ package se.vbgt.aoc.year2020.day14
 import kotlin.math.pow
 
 val maskPrefix = "mask = "
-private val memposValueRegex = """^mem\[(\d+)\] = (\d+)""".toRegex()
+val memposValueRegex = """^mem\[(\d+)\] = (\d+)""".toRegex()
 
 tailrec fun part1(
     lines: List<String>,
