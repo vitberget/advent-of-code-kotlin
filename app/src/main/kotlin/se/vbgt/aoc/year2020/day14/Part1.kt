@@ -2,9 +2,6 @@ package se.vbgt.aoc.year2020.day14
 
 import kotlin.math.pow
 
-val maskPrefix = "mask = "
-val memposValueRegex = """^mem\[(\d+)\] = (\d+)""".toRegex()
-
 tailrec fun part1(
     lines: List<String>,
     memory: Map<Long, Long> = mapOf(),
@@ -23,12 +20,7 @@ tailrec fun part1(
                 zeroes
             )
         } else {
-            val (mempos, value) =
-                memposValueRegex
-                    .find(lines[0])!!
-                    .groupValues
-                    .drop(1)
-                    .map { it.toLong() }
+            val (mempos, value) = lineToMemposAndValue(lines[0])
             val valueModded =
                 value
                     .or(maskOnes)
@@ -43,6 +35,16 @@ tailrec fun part1(
         }
     }
 
+fun lineToMemposAndValue(line: String) =
+    memposValueRegex
+    .find(line)!!
+    .groupValues
+    .drop(1)
+    .map { it.toLong() }
+
+val memposValueRegex = """^mem\[(\d+)\] = (\d+)""".toRegex()
+const val maskPrefix = "mask = "
+
 fun lineToMask(line: String): Pair<Long, Long> {
     val data = line.removePrefix(maskPrefix).reversed()
 
@@ -50,7 +52,7 @@ fun lineToMask(line: String): Pair<Long, Long> {
     val ones = indicesToLong(oneIdxs)
 
     val zeroIdxs = indicesOf(data, '0')
-    val zeroes = Long.MAX_VALUE.xor(indicesToLong(zeroIdxs))
+    val zeroes = indicesToLong(zeroIdxs).xor(Long.MAX_VALUE)
 
     return ones to zeroes
 }

@@ -20,54 +20,38 @@ tailrec fun part2(
                 xses
             )
         } else {
-            val (mempos, value) =
-                memposValueRegex
-                    .find(lines[0])!!
-                    .groupValues
-                    .drop(1)
-                    .map { it.toLong() }
-
+            val (mempos, value) = lineToMemposAndValue(lines[0])
             val memPositions = calcMemPos(mempos, maskOnes, maskXses)
-
+            updateMemory(memory, memPositions.toList(), value)
             part2(
                 lines.drop(1),
-                updateMemory(memory, memPositions.toList(), value),
+                memory,
                 maskOnes,
                 maskXses
             )
         }
     }
 
-tailrec fun updateMemory(
+fun updateMemory(
     memory: MutableMap<Long, Long>,
     memPositions: List<Long>,
     value: Long
-): MutableMap<Long, Long> =
-    if (memPositions.isEmpty()) {
-        memory
-    } else {
-        memory.put(memPositions[0], value)
-        updateMemory(
-            memory,
-            memPositions.drop(1),
-            value
-        )
-    }
+) = memPositions.forEach { memory[it] = value }
 
 fun calcMemPos(mempos: Long, maskOnes: Long, maskXses: List<Int>): Set<Long> {
-
     val memposOr = mempos.or(maskOnes)
-    val upperLimit = 2.0
-        .pow(maskXses.size)
-        .toInt()
-        .dec()
 
-    return (0..upperLimit)
+    return (0..`raiseTwoByX-1`(maskXses.size))
         .map { it.toLong() }
         .map { memPosModder(it, memposOr, maskXses) }
         .toSet()
-
 }
+
+private fun `raiseTwoByX-1`(maskSize: Int) =
+    2.0
+        .pow(maskSize)
+        .toInt()
+        .dec()
 
 fun memPosModder(number: Long, mempos: Long, maskXses: List<Int>): Long {
     val xVals = maskXses
@@ -75,11 +59,11 @@ fun memPosModder(number: Long, mempos: Long, maskXses: List<Int>): Long {
         .map { (x, v) -> x to v.and(number) }
 
     val onesM = xVals
-        .filterNot { (_, v) -> v == 0L }
+        .filterNot { it.second == 0L }
         .map { it.first }
 
     val zeroesM = xVals
-        .filter { (_, v) -> v == 0L }
+        .filter { it.second == 0L }
         .map { it.first }
 
     val ones = indicesToLong(onesM)
