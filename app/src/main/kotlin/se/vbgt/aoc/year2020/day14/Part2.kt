@@ -41,13 +41,13 @@ fun updateMemory(
 fun calcMemPos(mempos: Long, maskOnes: Long, maskXses: List<Int>): Set<Long> {
     val memposOr = mempos.or(maskOnes)
 
-    return (0..`raiseTwoByX-1`(maskXses.size))
+    return (0..`2^N-1`(maskXses.size))
         .map { it.toLong() }
         .map { memPosModder(it, memposOr, maskXses) }
         .toSet()
 }
 
-private fun `raiseTwoByX-1`(maskSize: Int) =
+private fun `2^N-1`(maskSize: Int) =
     2.0
         .pow(maskSize)
         .toInt()

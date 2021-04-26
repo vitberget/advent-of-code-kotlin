@@ -14,5 +14,5 @@ fun main() {
 
     val (p2, t2) = measureTimedValue { part2(lines) }
     println("Part2: $p2, took $t2")
-    //Part2: 4355897790573, took 11.8s
+    //Part2: 4355897790573, took 767ms
 }
