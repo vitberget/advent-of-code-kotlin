@@ -21,8 +21,10 @@ tailrec fun part2(
             )
         } else {
             val (mempos, value) = lineToMemposAndValue(lines[0])
-            val memPositions = calcMemPos(mempos, maskOnes, maskXses)
-            updateMemory(memory, memPositions.toList(), value)
+
+            calcMemPos(mempos, maskOnes, maskXses)
+                .forEach { memory[it] = value }
+
             part2(
                 lines.drop(1),
                 memory,
@@ -31,12 +33,6 @@ tailrec fun part2(
             )
         }
     }
-
-fun updateMemory(
-    memory: MutableMap<Long, Long>,
-    memPositions: List<Long>,
-    value: Long
-) = memPositions.forEach { memory[it] = value }
 
 fun calcMemPos(mempos: Long, maskOnes: Long, maskXses: List<Int>): Set<Long> {
     val memposOr = mempos.or(maskOnes)
