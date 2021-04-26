@@ -42,16 +42,11 @@ fun calcMemPos(mempos: Long, maskOnes: Long, maskXses: List<Int>): Set<Long> {
     val memposOr = mempos.or(maskOnes)
 
     return (0..`2^N-1`(maskXses.size))
-        .map { it.toLong() }
         .map { memPosModder(it, memposOr, maskXses) }
         .toSet()
 }
 
-private fun `2^N-1`(maskSize: Int) =
-    2.0
-        .pow(maskSize)
-        .toInt()
-        .dec()
+fun `2^N-1`(exponent: Int): Long = `2^N`(exponent) - 1
 
 fun memPosModder(number: Long, mempos: Long, maskXses: List<Int>): Long {
     val xVals = maskXses
@@ -71,7 +66,6 @@ fun memPosModder(number: Long, mempos: Long, maskXses: List<Int>): Long {
 
     return mempos.or(ones).and(zeroes)
 }
-
 
 fun lineToMasks(line: String): Pair<Long, List<Int>> {
     val data = line.removePrefix(maskPrefix).reversed()

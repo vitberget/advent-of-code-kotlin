@@ -37,10 +37,10 @@ tailrec fun part1(
 
 fun lineToMemposAndValue(line: String) =
     memposValueRegex
-    .find(line)!!
-    .groupValues
-    .drop(1)
-    .map { it.toLong() }
+        .find(line)!!
+        .groupValues
+        .drop(1)
+        .map { it.toLong() }
 
 val memposValueRegex = """^mem\[(\d+)\] = (\d+)""".toRegex()
 const val maskPrefix = "mask = "
@@ -58,8 +58,10 @@ fun lineToMask(line: String): Pair<Long, Long> {
 }
 
 fun indicesToLong(idxs: List<Int>): Long =
-    idxs.map { 2.0.pow(it).toLong() }
+    idxs.map { `2^N`(it) }
         .sumOf { it }
+
+fun `2^N`(exponent: Int): Long = 2.0.pow(exponent).toLong()
 
 fun indicesOf(data: String, matchChar: Char): List<Int> =
     data.mapIndexed { i, c -> i to c }
