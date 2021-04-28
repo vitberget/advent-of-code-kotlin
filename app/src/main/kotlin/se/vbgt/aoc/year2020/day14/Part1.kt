@@ -48,7 +48,7 @@ fun lineToMask(line: String): Pair<Long, Long> {
 
     val zeroes = indicesOf(data, '0')
         .sumOf { 1L shl it }
-        .xor(Long.MAX_VALUE)
+        .inv()
 
     return ones to zeroes
 }

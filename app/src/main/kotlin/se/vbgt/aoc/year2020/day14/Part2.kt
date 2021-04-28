@@ -56,7 +56,7 @@ fun memPosModder(number: Long, mempos: Long, maskXses: List<Int>): Long {
         .map { it.first }
 
     val ones = onesM.sumOf { 1L shl it }
-    val zeroes = zeroesM.sumOf { 1L shl it }.xor(Long.MAX_VALUE)
+    val zeroes = zeroesM.sumOf { 1L shl it }.inv()
 
     return mempos or ones and zeroes
 }
