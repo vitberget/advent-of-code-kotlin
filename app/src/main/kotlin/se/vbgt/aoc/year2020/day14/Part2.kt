@@ -1,11 +1,9 @@
 package se.vbgt.aoc.year2020.day14
 
-import kotlin.math.pow
-
 tailrec fun part2(
     lines: List<String>,
     memory: MutableMap<Long, Long> = mutableMapOf(),
-    maskOnes: Long = 0,
+    maskOnes: Long = 0L,
     maskXses: List<Int> = listOf(),
 ): Long =
     if (lines.isEmpty()) {
@@ -20,10 +18,10 @@ tailrec fun part2(
                 xses
             )
         } else {
-            val (mempos, value) = lineToMemposAndValue(lines[0])
-
-            calcMemPos(mempos, maskOnes, maskXses)
-                .forEach { memory[it] = value }
+            lineToMemposAndValue(lines[0]).apply {
+                calcMemPos(this[0], maskOnes, maskXses)
+                    .forEach { memory[it] = this[1] }
+            }
 
             part2(
                 lines.drop(1),
@@ -34,40 +32,41 @@ tailrec fun part2(
         }
     }
 
-fun calcMemPos(mempos: Long, maskOnes: Long, maskXses: List<Int>): Set<Long> {
-    val memposOr = mempos.or(maskOnes)
-
-    return (0 until (1L shl maskXses.size))
-        .map { memPosModder(it, memposOr, maskXses) }
+fun calcMemPos(mempos: Long, maskOnes: Long, maskXses: List<Int>): Set<Long> =
+    (0 until (1L shl maskXses.size))
+        .map { memPosModder(it, mempos or maskOnes, maskXses) }
         .toSet()
-}
 
 fun memPosModder(number: Long, mempos: Long, maskXses: List<Int>): Long {
-    val xVals = maskXses
-        .mapIndexed { i, x -> x to 2.0.pow(i).toLong() }
-        .map { (x, v) -> x to v.and(number) }
+    maskXses
+        .mapIndexed { i, x -> x to (1L shl i) }
+        .map { (x, v) -> x to (v and number) }
+        .apply {
+            val ones = this
+                .filterNot { it.second == 0L }
+                .map { it.first }
+                .indicesToLong()
 
-    val onesM = xVals
-        .filterNot { it.second == 0L }
-        .map { it.first }
+            val zeroes = this
+                .filter { it.second == 0L }
+                .map { it.first }
+                .indicesToLong()
+                .inv()
 
-    val zeroesM = xVals
-        .filter { it.second == 0L }
-        .map { it.first }
-
-    val ones = onesM.sumOf { 1L shl it }
-    val zeroes = zeroesM.sumOf { 1L shl it }.inv()
-
-    return mempos or ones and zeroes
+            return mempos or ones and zeroes
+        }
 }
 
 fun lineToMasks(line: String): Pair<Long, List<Int>> {
-    val data = line.removePrefix(maskPrefix).reversed()
+    line.removePrefix(maskPrefix)
+        .reversed()
+        .apply {
+            val ones = this
+                .indicesOf('1')
+                .sumOf { 1L shl it }
 
-    val oneIdxs = indicesOf(data, '1')
-    val ones = oneIdxs.sumOf { 1L shl it }
+            val xIdxs = this.indicesOf('X')
 
-    val xIdxs = indicesOf(data, 'X')
-
-    return ones to xIdxs
+            return ones to xIdxs
+        }
 }

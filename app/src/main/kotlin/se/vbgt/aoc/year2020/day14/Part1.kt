@@ -3,8 +3,8 @@ package se.vbgt.aoc.year2020.day14
 tailrec fun part1(
     lines: List<String>,
     memory: Map<Long, Long> = mapOf(),
-    maskOnes: Long = 0,
-    maskZeroes: Long = 0
+    maskOnes: Long = 0L,
+    maskZeroes: Long = 0L
 ): Long =
     if (lines.isEmpty()) {
         memory.values.sumOf { it }
@@ -41,19 +41,25 @@ val memposValueRegex = """^mem\[(\d+)\] = (\d+)""".toRegex()
 const val maskPrefix = "mask = "
 
 fun lineToMask(line: String): Pair<Long, Long> {
-    val data = line.removePrefix(maskPrefix).reversed()
+    line.removePrefix(maskPrefix)
+        .reversed()
+        .apply {
+            val ones = this
+                .indicesOf('1')
+                .indicesToLong()
 
-    val oneIdxs = indicesOf(data, '1')
-    val ones = oneIdxs.sumOf { 1L shl it }
+            val zeroes = this
+                .indicesOf('0')
+                .indicesToLong()
+                .inv()
 
-    val zeroes = indicesOf(data, '0')
-        .sumOf { 1L shl it }
-        .inv()
-
-    return ones to zeroes
+            return ones to zeroes
+        }
 }
 
-fun indicesOf(data: String, matchChar: Char): List<Int> =
-    data.mapIndexed { i, c -> i to c }
+fun Collection<Int>.indicesToLong(): Long = this.sumOf { 1L shl it }
+
+fun String.indicesOf(matchChar: Char): List<Int> =
+    this.mapIndexed { i, c -> i to c }
         .filter { it.second == matchChar }
         .map { it.first }
