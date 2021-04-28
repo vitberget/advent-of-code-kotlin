@@ -37,7 +37,7 @@ fun lineToMemposAndValue(line: String) =
         .drop(1)
         .map { it.toLong() }
 
-val memposValueRegex = """^mem\[(\d+)\] = (\d+)""".toRegex()
+val memposValueRegex = """^mem\[(\d+)] = (\d+)""".toRegex()
 const val maskPrefix = "mask = "
 
 fun lineToMask(line: String): Pair<Long, Long> {
