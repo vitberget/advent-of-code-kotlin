@@ -37,12 +37,10 @@ tailrec fun part2(
 fun calcMemPos(mempos: Long, maskOnes: Long, maskXses: List<Int>): Set<Long> {
     val memposOr = mempos.or(maskOnes)
 
-    return (0..`2^N-1`(maskXses.size))
+    return (0 until (1L shl maskXses.size))
         .map { memPosModder(it, memposOr, maskXses) }
         .toSet()
 }
-
-fun `2^N-1`(exponent: Int): Long = `2^N`(exponent) - 1
 
 fun memPosModder(number: Long, mempos: Long, maskXses: List<Int>): Long {
     val xVals = maskXses
@@ -57,17 +55,17 @@ fun memPosModder(number: Long, mempos: Long, maskXses: List<Int>): Long {
         .filter { it.second == 0L }
         .map { it.first }
 
-    val ones = indicesToLong(onesM)
-    val zeroes = indicesToLong(zeroesM).xor(Long.MAX_VALUE)
+    val ones = onesM.sumOf { 1L shl it }
+    val zeroes = zeroesM.sumOf { 1L shl it }.xor(Long.MAX_VALUE)
 
-    return mempos.or(ones).and(zeroes)
+    return mempos or ones and zeroes
 }
 
 fun lineToMasks(line: String): Pair<Long, List<Int>> {
     val data = line.removePrefix(maskPrefix).reversed()
 
     val oneIdxs = indicesOf(data, '1')
-    val ones = indicesToLong(oneIdxs)
+    val ones = oneIdxs.sumOf { 1L shl it }
 
     val xIdxs = indicesOf(data, 'X')
 

@@ -1,7 +1,5 @@
 package se.vbgt.aoc.year2020.day14
 
-import kotlin.math.pow
-
 tailrec fun part1(
     lines: List<String>,
     memory: Map<Long, Long> = mapOf(),
@@ -21,10 +19,7 @@ tailrec fun part1(
             )
         } else {
             val (mempos, value) = lineToMemposAndValue(lines[0])
-            val valueModded =
-                value
-                    .or(maskOnes)
-                    .and(maskZeroes)
+            val valueModded = value or maskOnes and maskZeroes
 
             part1(
                 lines.drop(1),
@@ -49,19 +44,14 @@ fun lineToMask(line: String): Pair<Long, Long> {
     val data = line.removePrefix(maskPrefix).reversed()
 
     val oneIdxs = indicesOf(data, '1')
-    val ones = indicesToLong(oneIdxs)
+    val ones = oneIdxs.sumOf { 1L shl it }
 
-    val zeroIdxs = indicesOf(data, '0')
-    val zeroes = indicesToLong(zeroIdxs).xor(Long.MAX_VALUE)
+    val zeroes = indicesOf(data, '0')
+        .sumOf { 1L shl it }
+        .xor(Long.MAX_VALUE)
 
     return ones to zeroes
 }
-
-fun indicesToLong(idxs: List<Int>): Long =
-    idxs.map { `2^N`(it) }
-        .sumOf { it }
-
-fun `2^N`(exponent: Int): Long = 2.0.pow(exponent).toLong()
 
 fun indicesOf(data: String, matchChar: Char): List<Int> =
     data.mapIndexed { i, c -> i to c }
