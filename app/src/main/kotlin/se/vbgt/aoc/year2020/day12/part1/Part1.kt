@@ -47,8 +47,9 @@ data class Ship(
     fun manhattan(): Int = abs(x) + abs(y)
 }
 
-fun day12part1(actions: List<Action>) {
+fun day12part1(actions: List<Action>): Int {
     val startingShip = Ship(0, 0, Heading.EAST)
+
     val endingShip = actions.fold(startingShip) { ship, action ->
         when (action.type) {
             ActionType.NORTH -> ship.north(action.number)
@@ -61,5 +62,5 @@ fun day12part1(actions: List<Action>) {
         }
     }
 
-    println("Part 1: ${endingShip.manhattan()}")
+    return endingShip.manhattan()
 }

@@ -31,7 +31,7 @@ data class Ship(
     fun manhattan(): Int = abs(x) + abs(y)
 }
 
-fun day12part2(actions: List<Action>) {
+fun day12part2(actions: List<Action>): Int {
     val startingShip = Ship()
         .east(10)
         .north(1)
@@ -48,6 +48,6 @@ fun day12part2(actions: List<Action>) {
         }
     }
 
-    println("Part 2: ${endingShip.manhattan()}")
+     return endingShip.manhattan()
 }
 
