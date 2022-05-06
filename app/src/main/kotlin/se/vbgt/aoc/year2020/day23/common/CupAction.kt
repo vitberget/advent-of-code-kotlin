@@ -1,12 +1,8 @@
 package se.vbgt.aoc.year2020.day23.common
 
-fun moveCupsManyTimes(state: State, numberOfCrabMoves: Int): State {
-    var iState = state
-    for (i in 1..numberOfCrabMoves) {
-        iState = moveCups(iState)
-    }
-    return iState
-}
+fun moveCupsManyTimes(state: State, numberOfCrabMoves: Int): State =
+    (1..numberOfCrabMoves)
+        .fold(state) { acc, _ -> moveCups(acc) }
 
 fun moveCups(state: State): State {
     // The crab picks up the three cups that are immediately clockwise of the current cup.

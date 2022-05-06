@@ -7,14 +7,22 @@ import kotlin.time.measureTimedValue
 
 @OptIn(ExperimentalTime::class)
 fun main() {
-    val puzzleString = "784235916"
-    val cupLabels = puzzleString.map { it - '0' } // Map string to list of cup labels (aka, numbers)
+    val cupLabels = getCupLabels()
 
     val (part1result, part1time) = measureTimedValue { part1(cupLabels, 100) }
     println("part1 result: ${part1result}, took ${part1time}")
+    // part1 result: 53248976, took 82.932865ms
 
     println()
 
     val (part2result, part2time)  = measureTimedValue { part2(cupLabels, 10_000_000) }
     println("part2 result: ${part2result}, took ${part2time}")
+    // part2 result: 418819514477, took 9.989923576s
 }
+
+private fun getCupLabels(): List<Int> {
+    val puzzleString = "784235916"
+    return puzzleString.map { it.toNumber() }
+}
+
+private fun Char.toNumber(): Int = this - '0'
