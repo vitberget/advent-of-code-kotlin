@@ -9,12 +9,10 @@ fun readFileIntoBags(filename: String): Map<String, Map<String, Int>> =
     File(filename)
         .readLines()
         .mapNotNull { selectBagNameAndContent.find(it) }
-        .map { it.groupValues[1] to stringToContents(it.groupValues[2]) }
-        .toMap()
+        .associate { it.groupValues[1] to stringToContents(it.groupValues[2]) }
 
 private fun stringToContents(text: String): Map<String, Int> =
     text.split("([.,])".toRegex())
         .map { it.trim() }
         .mapNotNull { selectBagNameAndCount.find(it) }
-        .map { it.groupValues[2] to it.groupValues[1].toInt() }
-        .toMap()
+        .associate { it.groupValues[2] to it.groupValues[1].toInt() }

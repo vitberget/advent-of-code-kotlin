@@ -33,7 +33,7 @@ fun playCrabCombat(crabCombatState: CrabCombatState): CrabCombatState {
                         player2 = currentRoundOfCrabCombat.player2.drop(1).take(playerCard2)
                     )
                 )
-                currentRoundOfCrabCombat.nextState(player1isWinner = subGameState.player2.isNullOrEmpty())
+                currentRoundOfCrabCombat.nextState(player1isWinner = subGameState.player2.isEmpty())
             } else {
                 // No special rules left...
                 currentRoundOfCrabCombat.nextState(player1isWinner = playerCard1 > playerCard2)

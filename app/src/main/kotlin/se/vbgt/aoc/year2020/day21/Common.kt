@@ -29,9 +29,8 @@ fun getAllergenIngredients(state: List<WordSetPair>): Map<String, WordSet> =
     state
         .flatMap { it.second }
         .toSet()
-        .map { allergen ->
-            allergen to state.filter { it.second.contains(allergen) }
+        .associateWith { allergen ->
+            state.filter { it.second.contains(allergen) }
                 .map { it.first }
                 .reduce { acc, set -> acc.intersect(set) }
         }
-        .toMap()

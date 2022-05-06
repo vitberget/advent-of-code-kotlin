@@ -69,7 +69,7 @@ fun readFileIntoForest(filename: String): Forest =
             width = this[0].length,
             height = this.size,
             trees = this
-                .flatMapIndexed { y, rad -> rad.mapIndexedNotNull() { x, char -> if (char == '#') Tree(x, y) else null } }
+                .flatMapIndexed { y, rad -> rad.mapIndexedNotNull { x, char -> if (char == '#') Tree(x, y) else null } }
                 .toSet()
         )
     }

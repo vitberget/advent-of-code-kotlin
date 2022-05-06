@@ -3,9 +3,7 @@ package se.vbgt.aoc.year2020.day22
 import se.vbgt.aoc.year2020.day22.common.fileToCrabCombatState
 import se.vbgt.aoc.year2020.day22.part1.part1
 import se.vbgt.aoc.year2020.day22.part2.part2
-import kotlin.system.measureTimeMillis
 import kotlin.time.ExperimentalTime
-import kotlin.time.measureTime
 import kotlin.time.measureTimedValue
 
 @ExperimentalTime

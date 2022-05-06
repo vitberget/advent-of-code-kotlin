@@ -13,5 +13,5 @@ fun part1(state: List<WordSetPair>, allergens: Map<String, WordSet>): Int {
     return state
         .map { it.first }
         .map { it.intersect(impossibleAllergenIngredients) }
-        .sumBy { it.size }
+        .sumOf { it.size }
 }
