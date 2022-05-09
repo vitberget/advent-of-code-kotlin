@@ -5,6 +5,9 @@ import se.vbgt.aoc.year2020.day23.part2.part2
 import kotlin.time.ExperimentalTime
 import kotlin.time.measureTimedValue
 
+/**
+ * https://adventofcode.com/2020/day/23
+ */
 @OptIn(ExperimentalTime::class)
 fun main() {
     val cupLabels = getCupLabels()
