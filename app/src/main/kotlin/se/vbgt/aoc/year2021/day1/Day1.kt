@@ -3,9 +3,8 @@ package se.vbgt.aoc.year2021.day1
 import java.io.File
 
 private fun zippie(delta: Int, numbers: List<Int>): Int =
-        numbers.zip(numbers.drop(delta)) { a, b ->
-            if (a < b) 1 else 0
-        }.sum()
+        numbers.zip(numbers.drop(delta))
+                .count { (a, b) -> a < b }
 
 fun main() {
     val nums = File("puzzle-2021-01.txt")
